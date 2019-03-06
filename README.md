@@ -3,7 +3,7 @@
 </p>
 
 # ClusterBuster
-ClusterBuster: Monitors your cluster jobs and sends you an email when they change state.
+Monitors your cluster jobs and sends you an email when they change state. No mailserver is required!
 
 ## Requirements
 * Python 3.6
