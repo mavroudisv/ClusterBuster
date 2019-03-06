@@ -3,33 +3,9 @@ import subprocess
 import time
 import sys
 from datetime import datetime
-
 from mailer import send_mail
 
-#Settings
-USERNAME = 'YOUR USERNAME'
-INTERVAL = 6
-STOP_AFTER = 600 #If not job is detected for STOP_AFTER intervals exit.
- 
- 
-#Measurements
-submitted_at = 0
-started_at   = 0
-finished_at  = 0
-
- 
- 
-##Submit job
-#process = subprocess.Popen(['qsub', 'job.sh'], stdout=subprocess.PIPE)
-#out, err = process.communicate()
-
-#Get id
-#id = str(out).split(" ")[2]
-
-#jobs[id] = {state}
-#Query jobs
-#if new id shows up -> event: new job
-#if existing job 	-> event: state change
+import common as cm
 
 
 def event_state_change(id,name,current_state):
@@ -50,28 +26,35 @@ def check_jobs(uname):
 	
 ##############################################################################################
 jobs = {}
-
 inactive_rounds = 0
+
 while True:
-	sleep(INTERVAL)
-	new_jobs = check_jobs(USERNAME)
+	sleep(cm.INTERVAL) #Start the day after a good night sleep.
+	new_jobs = check_jobs(cm.USERNAME)
 	
+	#If there are no new jobs. Go back to sleep.
 	if new_jobs == {}:
 		inactive_rounds += 1
 		continue
-	else:
-		for j in new_jobs:
-			if not j in jobs:
-				jobs[j]=new_jobs[j]
-				event_state_change(j,new_jobs[j][0],new_jobs[j][1])
-			elif j in jobs and (jobs[j]!=new_jobs[j]):
-				jobs[j]=new_jobs[j]
-				event_state_change(j,new_jobs[j][0],new_jobs[j][1])
+
+	#There are jobs to monitor for
+	for j in new_jobs:
+		if not j in jobs:
+			jobs[j]=new_jobs[j]
+			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
+		elif j in jobs and (jobs[j][1]!=new_jobs[j][1]):
+			jobs[j]=new_jobs[j]
+			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
+
+	#Stop looking for a job if it's finished.
 	to_remove = []	
 	for j in jobs:
 		if j not in new_jobs:
 			event_state_change(j,jobs[j][0],"finished")
 			to_remove.append(j)
-	
 	for i in to_remove:
 		del jobs[i]
+	
+	#Exit if we haven't seen any jobs in a while
+	if inactive_rounds > cm.STOP_AFTER:
+		sys.exit(0)
