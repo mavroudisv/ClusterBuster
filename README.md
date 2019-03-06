@@ -1,10 +1,12 @@
-<img src="./logo.png" width="250" height="250">
+<p align="center">
+	<img src="./logo.png" width="250" height="250">
+</p>
 
 # ClusterBuster
 ClusterBuster: Monitors your cluster jobs and sends you an email when they change state
 
 ## Requirements
--Python 3.6
+* Python 3.6
 
 ## Setup
 1. Create a gmail account to send the emails from. 
