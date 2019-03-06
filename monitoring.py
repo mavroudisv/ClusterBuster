@@ -40,6 +40,7 @@ def check_jobs(uname):
 	jobs = {} #id, (name, status)
 	process = subprocess.Popen(['qstat', '-u',  uname], stdout=subprocess.PIPE)
 	out, err = process.communicate()
+	out = out.decode("utf-8")
 	for row in out.splitlines()[2:]:
 		details = row.split()
 		jobs[details[0]]=(details[2],details[4])
