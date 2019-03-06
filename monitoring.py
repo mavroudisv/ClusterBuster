@@ -32,20 +32,6 @@ while True:
 	sleep(cm.INTERVAL) #Start the day after a good night sleep.
 	new_jobs = check_jobs(cm.USERNAME)
 	
-	#If there are no new jobs. Go back to sleep.
-	if new_jobs == {}:
-		inactive_rounds += 1
-		continue
-
-	#There are jobs to monitor for
-	for j in new_jobs:
-		if not j in jobs:
-			jobs[j]=new_jobs[j]
-			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
-		elif j in jobs and (jobs[j][1]!=new_jobs[j][1]):
-			jobs[j]=new_jobs[j]
-			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
-
 	#Stop looking for a job if it's finished.
 	to_remove = []	
 	for j in jobs:
@@ -54,6 +40,21 @@ while True:
 			to_remove.append(j)
 	for i in to_remove:
 		del jobs[i]
+	
+	#If there are no new jobs. Go back to sleep.
+	if new_jobs == {}:
+		inactive_rounds += 1
+		continue
+
+	#There are jobs to monitor for
+	inactive_rounds = 0
+	for j in new_jobs:
+		if not j in jobs:
+			jobs[j]=new_jobs[j]
+			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
+		elif j in jobs and (jobs[j][1]!=new_jobs[j][1]):
+			jobs[j]=new_jobs[j]
+			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
 	
 	#Exit if we haven't seen any jobs in a while
 	if inactive_rounds > cm.STOP_AFTER:
