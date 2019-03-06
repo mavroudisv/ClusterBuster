@@ -1,9 +1,9 @@
-<img src="./logo.png">
+<img src="./logo.png" width="250" height="250">
 
 # ClusterBuster
 ClusterBuster: Monitors your cluster jobs and sends you an email when they change state
 
-##Requirements
+## Requirements
 -Python 3.6
 
 ## Setup
