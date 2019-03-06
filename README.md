@@ -11,9 +11,8 @@ ClusterBuster: Monitors your cluster jobs and sends you an email when they chang
 ## Setup
 1. Create a gmail account to send the emails from. 
 2. Generate an application password from: [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
-3. Edit ''mailer.py'' and include: your email, the email address to send notifications to, and your newly generated password.
-4. Edit you username for the cluster machine in ''monitoring.py''.
-5. From the ''monitoring.py'' script you can edit for how long the script will keep looking for new jobs (STOP_AFTER).
+3. Edit ''common.py'' and include: your gmail address, the email address to send notifications to, your username for the cluster machine, and your newly generated password.
+4. From the ''common.py'' script you can edit for how long the script will keep looking for new jobs (STOP_AFTER).
 
 
 ## Instructions
