@@ -3,7 +3,7 @@
 </p>
 
 # ClusterBuster
-ClusterBuster: Monitors your cluster jobs and sends you an email when they change state
+ClusterBuster: Monitors your cluster jobs and sends you an email when they change state.
 
 ## Requirements
 * Python 3.6
@@ -17,8 +17,8 @@ ClusterBuster: Monitors your cluster jobs and sends you an email when they chang
 
 
 ## Instructions
-Run ```python monitoring.py```
+Run: ```python monitoring.py```
 
-That's all. If you want to close the terminal you can also do 
+That's all. If you want to close the terminal you can also do:
 
-```nohup python3 monitoring.py &```
+```nohup python monitoring.py &```
