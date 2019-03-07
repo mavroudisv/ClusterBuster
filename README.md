@@ -20,4 +20,4 @@ Run: ```python monitoring.py```
 
 That's all. If you want to close the terminal you can also do:
 
-```nohup python monitoring.py &```
+```nohup python monitoring.py >/dev/null 2>&1 &```
