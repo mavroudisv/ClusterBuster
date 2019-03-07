@@ -21,3 +21,5 @@ Run: ```python monitoring.py```
 That's all. If you want to close the terminal you can also do:
 
 ```nohup python monitoring.py >/dev/null 2>&1 &```
+
+This will run the monitoring in the background, will supress any nohup output files, and will keep running even if you end your session.
