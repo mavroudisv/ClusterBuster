@@ -48,13 +48,17 @@ while True:
 
 	#There are jobs to monitor for
 	inactive_rounds = 0
+	to_add = []
 	for j in new_jobs:
 		if not j in jobs:
-			jobs[j]=new_jobs[j]
+			to_add.append([j,new_jobs[j]])
 			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
 		elif j in jobs and (jobs[j][1]!=new_jobs[j][1]):
 			jobs[j]=new_jobs[j]
 			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
+	for i in to_add:
+		jobs[i[0]] = i[1]
+	
 	
 	#Exit if we haven't seen any jobs in a while
 	if inactive_rounds > cm.STOP_AFTER:

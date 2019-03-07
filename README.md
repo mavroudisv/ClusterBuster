@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="./logo.png" width="500" height="500">
+	<img src="./images/logo.png" width="500" height="500">
 </p>
 
 # ClusterBuster
