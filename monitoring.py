@@ -19,7 +19,7 @@ def check_jobs(uname):
 	out = out.decode("utf-8")
 	for row in out.splitlines()[2:]:
 		details = row.split()
-		jobs[details[0]]=(details[2],details[4])
+		jobs[details[0]]=(details[2],details[4]) #key: id, value: (name, state)
 	return jobs
 
 	
@@ -48,16 +48,16 @@ while True:
 
 	#There are jobs to monitor for
 	inactive_rounds = 0
-	to_add = []
+	to_add = {}
 	for j in new_jobs:
-		if not j in jobs:
-			to_add.append([j,new_jobs[j]])
+		if not (j in jobs):
+			to_add[j]=new_jobs[j]
 			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
-		elif j in jobs and (jobs[j][1]!=new_jobs[j][1]):
+		elif (j in jobs) and (jobs[j][1]!=new_jobs[j][1]):
 			jobs[j]=new_jobs[j]
 			event_state_change(j,new_jobs[j][0],new_jobs[j][1])
 	for i in to_add:
-		jobs[i[0]] = i[1]
+		jobs[i] = new_jobs[j]
 	
 	
 	#Exit if we haven't seen any jobs in a while
