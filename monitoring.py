@@ -7,10 +7,14 @@ from mailer import send_mail
 
 import common as cm
 
-
-def event_state_change(id,name,current_state):
+def read_job_result(id,name):
+	with open(fname, 'r') as fin:
+		contents = fin.read(cm.HOME_PATH + name + ".o" + id)
+	return contents
+	
+def event_state_change(id,name,current_state, other=None):
 	stamp = datetime.utcfromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-	send_mail(id,name,current_state,stamp) #Send email
+	send_mail(id,name,current_state,stamp, other) #Send email
 
 def check_jobs(uname):
 	jobs = {} #id, (name, status)
@@ -36,7 +40,10 @@ while True:
 	to_remove = []	
 	for j in jobs:
 		if j not in new_jobs:
-			event_state_change(j,jobs[j][0],"finished")
+			if cm.SEND_JOB_OUTPUT:
+				event_state_change(j,jobs[j][0],"finished",read_job_result(j,jobs[j][0]))
+			else:
+				event_state_change(j,jobs[j][0],"finished")
 			to_remove.append(j)
 	for i in to_remove:
 		del jobs[i]
