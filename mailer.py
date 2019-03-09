@@ -12,7 +12,7 @@ def send_mail(job_id, job_name, status, timestamp, other=None):
 	msg = MIMEMultipart()
 	msg['From'] = cm.EMAIL_FROM
 	msg['To'] = cm.EMAIL_TO
-	msg['Subject'] = "Cluster Job Update: (" + str(job_name) + " " + status + ")"
+	msg['Subject'] = "Cluster Job Update: (" + str(job_name) + ")"
 	
 	if cm.GROUP_EMAILS:
 		msg.add_header('Message-ID', "<" + job_id + "." + cm.EMAIL_FROM + ">")
