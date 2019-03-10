@@ -23,7 +23,7 @@ def send_mail(job_id, job_name, status, timestamp, other=None):
 	body += "</br>Time: <b>" + str(timestamp) + "</b></p></body></html>"
 
 	if other:
-		body += "</br></br>" + str(other)
+		body += "</br></br></br><p>" + str(other) + "</p>"
 	
 	msg.attach(MIMEText(body, 'html'))
 	text = msg.as_string()

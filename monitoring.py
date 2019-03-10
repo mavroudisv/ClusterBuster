@@ -7,9 +7,10 @@ from mailer import send_mail
 
 import common as cm
 
-def read_job_result(id,name):
-	with open(fname, 'r') as fin:
-		contents = fin.read(cm.HOME_PATH + name + ".o" + id)
+def read_job_result(jid,jname):
+	filepath = cm.HOME_PATH + jname + ".o" + jid
+	with open(filepath, 'r') as fin:
+		contents = fin.read()
 	return contents
 	
 def event_state_change(id,name,current_state, other=None):
@@ -35,7 +36,7 @@ inactive_rounds = 0
 while True:
 	sleep(cm.INTERVAL) #Start the day after a good night sleep.
 	new_jobs = check_jobs(cm.USERNAME)
-	
+
 	#Stop looking for a job if it's finished.
 	to_remove = []	
 	for j in jobs:
