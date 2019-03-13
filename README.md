@@ -3,7 +3,13 @@
 </p>
 
 # ClusterBuster
-Monitors your cluster jobs and sends you an email when they change state. No mailserver is required!
+Monitors your cluster jobs and sends you an email when they change state.
+
+### Features
+* No mailserver is required.
+* Each job has its own conversation thread in Gmail.
+* Returns the process logs of each finished job.
+* Monitoring process exits after <user-defined> hours of inactity.
 
 ## Requirements
 * Python 3.6
