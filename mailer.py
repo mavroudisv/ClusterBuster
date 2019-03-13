@@ -20,10 +20,10 @@ def send_mail(job_id, job_name, status, timestamp, other=None):
 		msg.add_header('References', "<" + job_id + "." + cm.EMAIL_FROM + ">")
 	
 	body = "<html><head></head><body><p> The cluster job <b>" + str(job_name) + "</b> (id: " + str(job_id) + ") is now in state <b>" + str(status) +"</b>.</p>"
-	body += "</br>Time: <b>" + str(timestamp) + "</b></p></body></html>"
+	body += "<br>Time: <b>" + str(timestamp) + "</b></p></body></html>"
 
 	if other:
-		body += "</br></br></br><p>" + str(other) + "</p>"
+		body += "<br><br><br><p>" + str(other) + "</p>"
 	
 	msg.attach(MIMEText(body, 'html'))
 	text = msg.as_string()

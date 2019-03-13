@@ -13,7 +13,7 @@ def read_job_result(jid,jname):
 		filepath = cm.HOME_PATH + jname + ".o" + jid
 		with open(filepath, 'r') as fin:
 			contents = fin.read()
-		contents = contents.replace("\n","</br>")
+		contents = contents.replace("\n","<br>")
 	except:
 		"No file found. Job probably killed by user."
 	return contents
